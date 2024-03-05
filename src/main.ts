@@ -21,9 +21,10 @@ const app = createApp(App)
 
 app.component('svg-icon',SvgIcon)
 
-
 // 注册icon组件
 import * as ElIconsModules from '@element-plus/icons-vue'
+console.log("全局组件",ElIconsModules);
+
 // 全局注册element-plus icon图标组件
 Object.keys(ElIconsModules).forEach((key) => {//循环遍历组件名称
     if ("Menu" !== key) {//如果不是图标组件不是Menu，就跳过，否则加上ICon的后缀

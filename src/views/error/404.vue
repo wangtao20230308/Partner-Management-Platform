@@ -21,7 +21,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+const message = '抱歉，您访问的页面不存在。';
 </script>
 <style lang="scss" scoped>
 .wscn-http404-container{

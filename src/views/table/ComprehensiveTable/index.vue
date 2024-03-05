@@ -62,9 +62,9 @@
 </template>
 <script lang="ts" setup name="comprehensive">
 import {ref, reactive, onMounted, nextTick} from 'vue'
-import * as dayjs from 'dayjs'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import type { FormInstance } from 'element-plus'
+// import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
+import { ElMessage, ElMessageBox, FormInstance } from 'element-plus'
 const loading = ref(true)
 const appContainer = ref(null)
 import PropTable from '@/components/Table/PropTable/index.vue'
@@ -164,7 +164,7 @@ const handleClose = async (done: () => void) => {
         ElMessage.success('添加成功')
       } else {
         list.value.forEach((item) => {
-          if (item.id === rowObj.value.id) {
+          if (item?.id === rowObj.value.id) {
             item.name = obj.name
             item.sex = obj.sex
             item.price = obj.price

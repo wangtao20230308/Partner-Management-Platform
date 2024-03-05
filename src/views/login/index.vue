@@ -2,12 +2,12 @@
   <div class="login-container">
     <div class="login-box">
       <div class="login-left">
-        <img src="@/assets/image/login/side-logo.png" >
+        <img src="@/assets/image/login/allipayIcon.png" >
       </div>
       <div class="login-form">
         <div class="login-title">
-          <img class="icon" src="@/assets/logo.png" alt="logo" />
-          <h2 class="title">Vue-Admin-Perfect</h2>
+          <img class="icon" src="@/assets/jpay.jpg" alt="logo" />
+          <h2 class="title">合作方管理平台</h2>
         </div>
         <LoginForm/>
       </div>

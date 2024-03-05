@@ -1,4 +1,4 @@
-export const errorCodeType = function(code:string):string{
+export const errorCodeType = function(code:number):string{
     let errMessage:string = "未知错误"
     switch (code) {
         case 400:
