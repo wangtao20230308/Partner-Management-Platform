@@ -1,4 +1,4 @@
-import { defineConfig,ConfigEnv, UserConfig,loadEnv  } from 'vite'
+import { defineConfig, ConfigEnv, UserConfig, loadEnv } from 'vite'
 import path from 'path'
 // vite.config.ts中无法使用import.meta.env 所以需要引入
 import vue from '@vitejs/plugin-vue'
@@ -7,12 +7,14 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 // 生产gz文件
 import viteCompression from 'vite-plugin-compression'
-// 按需加载
-// import AutoImport from 'unplugin-auto-import/vite'
-// import Components from 'unplugin-vue-components/vite'
-//import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// 自动导入vue中hook reactive ref等
+import AutoImport from "unplugin-auto-import/vite"
+//自动导入ui-组件 比如说ant-design-vue  element-plus等
+import Components from 'unplugin-vue-components/vite';
+//element
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
 
@@ -20,28 +22,42 @@ function resolve (dir) {
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   return {
     plugins: [vue(),
-      vueSetupExtend(),
-      // AutoImport({
-      //   resolvers: [ElementPlusResolver()],
-      // }),
-      // Components({
-      //   resolvers: [ElementPlusResolver()],
-      // }),
-      // * 使用 svg 图标
-      createSvgIconsPlugin({
-        // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
-        // 指定symbolId格式
-        symbolId: 'icon-[dir]-[name]',
-      }),
-      // gzip压缩 生产环境生成 .gz 文件
-      mode==='production'&&viteCompression({
-         verbose: true,
-         disable: false,
-         threshold: 10240,
-         algorithm: 'gzip',
-         ext: '.gz',
-       }),
+    vueSetupExtend(),
+    AutoImport({
+      //安装两行后你会发现在组件中不用再导入ref，reactive等
+      imports: ['vue', 'vue-router'],
+      //存放的位置
+      dts: "src/auto-import.d.ts",
+      //element
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      // 引入组件的,包括自定义组件
+      // 存放的位置
+      dts: "src/components.d.ts",
+      resolvers: [ElementPlusResolver()]
+    }),
+    // AutoImport({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
+    // Components({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
+    // * 使用 svg 图标
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+    }),
+    // gzip压缩 生产环境生成 .gz 文件
+    mode === 'production' && viteCompression({
+      verbose: true,
+      disable: false,
+      threshold: 10240,
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
     ],
     css: {
       preprocessorOptions: {
@@ -53,8 +69,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     // 配置别名
     resolve: {
       alias: {
-        '@':resolve('src'),
-        'static':resolve('public/static'),
+        '@': resolve('src'),
+        'static': resolve('public/static'),
       },
       // 忽略后缀名的配置选项, 添加 .vue 选项时要记得原本默认忽略的选项也要手动写入
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],

@@ -19,8 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { useRoute ,useRouter} from 'vue-router'
+// 自动导入组件和vue的ref，reactive和路由插件后、不需要再引入
+// import { ref, computed } from 'vue'
+// import { useRoute ,useRouter} from 'vue-router'
 import 'animate.css'
 
 const route = useRoute()
