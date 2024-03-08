@@ -97,11 +97,11 @@ const ruleFormRef = ref<FormInstance>()
 const emit = defineEmits(['reset', 'onSubmit', 'selection-change'])
 let props = defineProps({
   columns: {
-    type: Array,
+    type: [],
     default: () => [],
   },
   data: {
-    type: Array,
+    type: [],
     default: () => [],
   },
   loading: {
@@ -121,9 +121,19 @@ const handleCurrentChange = (val: number) => {
   currentPage1.value = val
 }
 
-const list = computed(() => {
-  let arr = JSON.parse(JSON.stringify(props.data))
-  return arr.splice((currentPage1.value - 1) * 10, 10)
+// const list = computed(() => {
+//   let arr = JSON.parse(JSON.stringify(props.data))
+//   return arr.splice((currentPage1.value - 1) * 10, 10)
+// })
+// 因不能修改只读、所以重写computed
+const list = computed({
+  get() {
+    return props.data
+  },
+  set(newVal) {
+    let arr = JSON.parse(JSON.stringify(newVal))
+    arr.splice((currentPage1.value - 1) * 10, 10)
+  }
 })
 
 const listLoading = ref(false)

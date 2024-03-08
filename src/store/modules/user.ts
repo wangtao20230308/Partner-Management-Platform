@@ -1,24 +1,27 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 
 
 export const useUserStore = defineStore({
     // id: 必须的，在所有 Store 中唯一
-    id:'userState',
+    id: 'userState',
     // state: 返回对象的函数
-    state: ()=>({
+    state: () => ({
         // 登录token
-        token:null,
+        token: null,
         // 登录用户信息
-        userInfo:{},
+        userInfo: {
+            username: '',
+            password: ''
+        },
         // 角色
-        roles:[]
+        roles: []
 
     }),
     getters: {},
     // 可以同步 也可以异步
-    actions:{
+    actions: {
         // 登录
-        login(userInfo){
+        login(userInfo) {
             const { username, password } = userInfo
             return new Promise(async (resolve, reject) => {
                 this.token = username
@@ -28,19 +31,19 @@ export const useUserStore = defineStore({
             })
         },
         // 获取用户授权角色信息，实际应用中 可以通过token通过请求接口在这里获取用户信息
-        getRoles(){
-            return new Promise((resolve, reject) =>{
+        getRoles() {
+            return new Promise((resolve, reject) => {
                 // 获取权限列表 默认就是超级管理员，因为没有进行接口请求 写死
                 this.roles = ['admin']
                 resolve(this.roles)
-            } )
+            })
         },
         // 获取用户信息 ，如实际应用中 可以通过token通过请求接口在这里获取用户信息
         getInfo(roles) {
-            return new Promise((resolve, reject) =>{
+            return new Promise((resolve, reject) => {
                 this.roles = roles
                 resolve(roles)
-            } )
+            })
         },
         // 退出
         logout() {

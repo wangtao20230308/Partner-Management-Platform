@@ -1,6 +1,9 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
-    <transition-group name="breadcrumb" mode="out-in">
+    <transition-group name="breadcrumb" mode="out-in" 
+    enter-active-class="animate__animated animate__backInRight" 
+    leave-active-class="animate__animated animate__hinge"
+    >
       <!-- 首页面包屑不要可以直接删除 🙅‍♀️ -->
       <el-breadcrumb-item :to="{ path: '/' }" key="home" v-if="matched[0].meta.title !== '首页'">
         <div class="breadcrumb-item">
@@ -18,6 +21,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { useRoute ,useRouter} from 'vue-router'
+import 'animate.css'
 
 const route = useRoute()
 const router = useRouter()

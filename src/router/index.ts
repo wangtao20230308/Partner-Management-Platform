@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory, RouteRecordRaw,createWebHashHistory,Router } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, createWebHashHistory, Router } from 'vue-router'
 import Layout from "@/layout/index.vue";
 // 扩展继承属性
 interface extendRoute {
-    hidden?:boolean
+  hidden?: boolean
 }
 //
 import tableRouter from './modules/table'
@@ -11,19 +11,21 @@ import nestedRouter from './modules/nested'
 import externalLink from './modules/externalLink'
 import formRouter from './modules/from'
 import functionPageRouter from './modules/functionPage'
+import cooperateRouter from './modules/cooperator'
 
 // 异步组件
 export const asyncRoutes = [
-    ...tableRouter,
-    ...formRouter,
-    ...functionPageRouter,
-    ...nestedRouter,
-    ...errorRouter,
-    ...externalLink,
-    {
-        path: '/:pathMatch(.*)',
-        redirect: '/404'
-    }
+  ...tableRouter,
+  ...formRouter,
+  ...functionPageRouter,
+  ...nestedRouter,
+  ...errorRouter,
+  ...externalLink,
+  ...cooperateRouter,
+  {
+    path: '/:pathMatch(.*)',
+    redirect: '/404'
+  }
 ]
 
 /**
@@ -41,13 +43,13 @@ export const asyncRoutes = [
  * meta.breadcrumb ==> 如果设置为false，该项将隐藏在breadcrumb中（默认值为true）
  */
 
-export const constantRoutes: Array<RouteRecordRaw&extendRoute> = [
+export const constantRoutes: Array<RouteRecordRaw & extendRoute> = [
   {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     hidden: true,
-    meta: { title: '登录',}
+    meta: { title: '登录', }
   },
   {
     path: '/',
@@ -59,7 +61,7 @@ export const constantRoutes: Array<RouteRecordRaw&extendRoute> = [
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'home',
-        meta: { title: '首页', icon: 'House', affix: true ,role:['other']}
+        meta: { title: '首页', icon: 'House', affix: true, role: ['other'] }
       },
     ]
   },
@@ -68,7 +70,7 @@ export const constantRoutes: Array<RouteRecordRaw&extendRoute> = [
 const router = createRouter({
   // history: createWebHistory(process.env.BASE_URL), // history
   history: createWebHashHistory(), // hash
-  routes:constantRoutes
+  routes: constantRoutes
 })
 
 export default router
