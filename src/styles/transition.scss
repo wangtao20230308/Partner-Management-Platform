@@ -14,7 +14,7 @@
 /* 路由 */
 .fade-slide-enter-from {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateX(-30px);
 }
 
 .fade-slide-enter-active {
@@ -23,12 +23,14 @@
 
 .fade-slide-enter-to {
   opacity: 1;
-  transform: translateY(0px);
+  transform: translateX(0px);
 }
 
 .fade-slide-leave-from {
   opacity: 1;
-  transform: translateY(0px);
+  width: 100%;
+  height: 100%;
+  transform: translateX(0px);
 }
 
 .fade-slide-leave-active {
@@ -37,7 +39,9 @@
 
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  width: 0;
+  height: 0;
+  transform: translateX(30px);
 }
 
 // logo动画
