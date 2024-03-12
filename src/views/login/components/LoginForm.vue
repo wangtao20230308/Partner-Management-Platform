@@ -90,9 +90,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
         })
         ElNotification({
           title: getTimeState(),
-          message: "欢迎登录 Vue Admin Perfect",
+          message: "欢迎登录环球汇合作方管理平台",
           type: "success",
-          duration: 3000
+          duration: 6000
         });
         loading.value = true
       },1000)

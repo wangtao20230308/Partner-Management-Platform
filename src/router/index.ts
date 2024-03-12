@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw, createWebHashHistory, Router } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, createWebHashHistory, Router, RouteLocation, RouteLocationRaw } from 'vue-router'
 import Layout from "@/layout/index.vue";
 // 扩展继承属性
 interface extendRoute {
@@ -56,6 +56,13 @@ export const constantRoutes: Array<RouteRecordRaw & extendRoute> = [
     name: 'layout',
     component: Layout,
     redirect: '/home',
+    // redirect: (to: RouteLocation) =>  {
+    //   console.log('to', to);
+    //     return {
+    //       path: '/home',
+    //       query: 'taoato' 
+    //     } as unknown as RouteLocationRaw
+    // },
     children: [
       {
         path: '/home',
@@ -70,7 +77,17 @@ export const constantRoutes: Array<RouteRecordRaw & extendRoute> = [
 const router = createRouter({
   // history: createWebHistory(process.env.BASE_URL), // history
   history: createWebHashHistory(), // hash
-  routes: constantRoutes
+  // scrollBehavior: (to, from, savaPosition) => {
+  //   if (savaPosition) {
+  //     return savaPosition
+  //   } else {
+  //     return {
+  //       top: 0,
+  //     }
+  //   }
+  // },
+  routes: constantRoutes,
+ 
 })
 
 export default router

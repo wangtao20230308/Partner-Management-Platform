@@ -61,6 +61,7 @@
 
 // export default service
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { ElLoading } from 'element-plus';
 import { Loading } from 'element-plus/es/components/loading/src/service';
 
 let loading = null;
@@ -89,10 +90,11 @@ class HttpRequest {
     interceptors(instance: AxiosInstance, url: string | number | undefined) {
         instance.interceptors.request.use(config => {
             // 添加全局的loading..
-            loading = Loading({
+            loading = ElLoading.service({
+                fullscreen: true,
                 lock: true,
-                text: 'Loading',
-                background: 'rgba(0, 0, 0, 0.7)'
+                text: '正在加载...',
+                background: 'rgba(0, 0, 0, 0.7)',
             });
             // 请求头携带token
             config.headers = config.headers || {}

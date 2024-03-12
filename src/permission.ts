@@ -30,7 +30,7 @@ router.beforeEach(async(to, from, next) => {
             // 路由添加进去了没有及时更新 需要重新进去一次拦截
             if(!PermissionStore.routes.length){
                 // 获取权限列表进行接口访问 因为这里页面要切换权限
-                const accessRoutes = await PermissionStore.generateRoutes(UserStore.roles)
+                const accessRoutes = await PermissionStore.generateRoutes(UserStore.roles) as any[]
                 hasRoles = false
                 accessRoutes.forEach(item => router.addRoute(item)) // 动态添加访问路由表
                 next({ ...to, replace: true }) // // 这里相当于push到一个页面 不在进入路由拦截
