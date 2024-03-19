@@ -25,7 +25,7 @@ import { useRouter } from 'vue-router'
 import {ElMessage, ElMessageBox} from "element-plus";
 import {computed, ref} from "vue";
 
-import AvatarLogo from '@/assets/image/avatar.png'
+import AvatarLogo from '@/assets/image/touxiang.jpg'
 import {useUserStore} from "@/store/modules/user"
 import {useTagsViewStore} from "@/store/modules/tagsView"
 import PersonalDialog from './PersonalDialog.vue'
